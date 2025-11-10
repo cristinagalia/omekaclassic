@@ -1,0 +1,2 @@
+# omekaclassic
+Plugin for omeka
