@@ -1,2 +1,2 @@
 # omekaclassic
-Plugin for omeka
+Plugin for omeka to show tagcloud
