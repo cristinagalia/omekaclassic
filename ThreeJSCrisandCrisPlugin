@@ -1,0 +1,47 @@
+<?php
+  
+
+class ThreeJSCrisandCrisPlugin extends Omeka_Plugin_AbstractPlugin
+{
+    protected $_hooks = [
+        'initialize',
+    ];
+
+    public function hookInitialize()
+    {
+        add_shortcode('threejs_crisandcris', [$this, 'shortcodeThreeJS']);
+    }
+
+    public function shortcodeThreeJS ($args, $view)
+    {
+        // Controlla se siamo su una pagina item/show
+        $item = $view->item;
+        if (!$item) {
+            return '<!-- FieldShortcode: non su una pagina item/show -->';
+        }
+
+        // Prendi il nome del campo dallo shortcode
+
+
+        $obj= metadata($item, array('Item Type Metadata', '3DOBJ'));
+        $mtl= metadata($item, array('Item Type Metadata', '3DMTL'));
+
+
+
+
+        $timestamp=rand(1, 12);
+
+
+        $link="/3d/3dpage.html?obj=".$obj."&mtl=".$mtl."&ts=".$timestamp;
+
+
+        if($obj!="")
+        {
+        $value='<div class="3d"><h2>Modello 3D</h2><iframe src="/plugins/ThreeJSCrisandCris/3d/3dpage.html?obj='.$obj.'&mtl='.$mtl.'&ts='.$timestamp.'" width="100%"   height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>';
+        }
+        else
+                $value="";
+
+        return $value;
+    }
+}
